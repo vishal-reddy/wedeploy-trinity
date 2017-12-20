@@ -1,0 +1,8 @@
+{
+  	"id": "rocketapp",
+  	"image": "rocket.chat:0.58",
+	"dependencies": ["rocketdb"],
+	"env": {
+		"MONGO_URL": "mongodb://rocketdb:27017/rocketchat"
+	}
+}

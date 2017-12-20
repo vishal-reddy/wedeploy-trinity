@@ -1,0 +1,14 @@
+{
+  	"id": "openprojectapp",
+  	"image": "openproject/community:7",
+  	"volume": "/data/openprojectapp",
+	"zeroDowntime": false,
+	"port": 8080,
+	"dependencies": ["openprojectdb", "openprojectcache"],
+	"env": {
+		"DATABASE_URL": "postgres://openproject:openproject@openprojectdb:5432/openproject?pool=10&encoding=unicode&timeout=5000&reconnect=true",
+		"SECRET_KEY_BASE": "ahfjakhlfajkdlhfljkhfkjahfkjfhkdjshf",
+		"CACHE_MEMCACHE_SERVER": "openprojectcache",
+		"CACHE_NAMESPACE": "openproject"
+	}
+}

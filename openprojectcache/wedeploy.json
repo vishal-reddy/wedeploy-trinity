@@ -1,0 +1,4 @@
+{
+  "id": "openprojectcache",
+  "image": "dockhero/memcached"
+}

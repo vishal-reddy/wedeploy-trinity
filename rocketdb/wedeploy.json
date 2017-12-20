@@ -1,0 +1,6 @@
+{
+  "id": "rocketdb",
+  "image": "mongo:3.6",
+  "volume": "/data/db",
+  "zeroDowntime": false
+}

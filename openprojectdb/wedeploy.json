@@ -1,0 +1,11 @@
+{
+	"id": "openprojectdb",
+	"image": "healthcheck/postgres",
+	"volume": "/var/lib/openproject/postgresql/data",
+	"env": {
+    	"POSTGRES_DB": "openproject",
+		"POSTGRES_USER": "openproject",
+		"POSTGRES_PASSWORD": "openproject"
+  	},
+	"zeroDowntime": false
+}
