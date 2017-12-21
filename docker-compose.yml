@@ -7,7 +7,7 @@ services:
       - POSTGRES_USER=openproject
       - POSTGRES_PASSWORD=openproject
     volumes:
-      - opdb:/var/lib/openproject/postgresql/data
+      - /Users/vlukereddy/lvm/opdb:/var/lib/openproject/postgresql/data
     networks: 
     - opnet
 
@@ -26,7 +26,7 @@ services:
       - CACHE_MEMCACHE_SERVER=openprojectcache
       - CACHE_NAMESPACE=openproject
     volumes:
-      - opapp:/data/openprojectapp
+      - /Users/vlukereddy/lvm/opapp:/data/openprojectapp
     ports:
       - 8080:80
     depends_on:
@@ -36,7 +36,7 @@ services:
       - opnet
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.0.1
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.0
     container_name: elasticsearch
     environment:
       - cluster.name=docker-cluster
@@ -47,14 +47,14 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - esdata1:/usr/share/elasticsearch/data
+      - /Users/vlukereddy/lvm/esdata1:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
       - opnet
 
   elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.0.1
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.0
     container_name: elasticsearch2
     environment:
       - cluster.name=docker-cluster
@@ -66,7 +66,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - esdata2:/usr/share/elasticsearch/data
+      - /Users/vlukereddy/lvm/esdata2:/usr/share/elasticsearch/data
     networks:
       - opnet
 
@@ -76,6 +76,7 @@ services:
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - /Users/vlukereddy/lvm/opapp:/data/openprojectapp
     ports:
       - "5000:5000"
     environment:
@@ -85,13 +86,11 @@ services:
     depends_on:
       - elasticsearch
       - elasticsearch2
-    volumes:
-      - opapp:/data/openprojectapp
+      
 
   kibana:
     build:
       context: kibana/
-    image: docker.elastic.co/kibana/kibana-oss:6.0.1
     environment:
       SERVER_NAME: localhost
       ELASTICSEARCH_HOST: elasticsearch
